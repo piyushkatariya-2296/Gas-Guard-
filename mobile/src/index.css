@@ -1,0 +1,454 @@
+/* GasGuard Mobile App Design System - Warm, Human-Made & Tactile */
+
+:root {
+  /* Warm Midnight Theme (Default) */
+  --bg-app: #0d131f;
+  --bg-surface: #141b2d;
+  --bg-surface-elevated: #1a233a;
+  --bg-surface-hover: #222d4a;
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-strong: rgba(255, 255, 255, 0.16);
+  --border-glow: rgba(249, 115, 22, 0.35);
+
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+  --text-subtle: #64748b;
+
+  /* Human Harmonious Palette */
+  --brand-primary: #f97316; /* Warm Tangerine Ember */
+  --brand-gradient: linear-gradient(135deg, #f97316 0%, #fb923c 50%, #f43f5e 100%);
+  --brand-glow: 0 10px 25px -5px rgba(249, 115, 22, 0.35);
+
+  /* Status Colors */
+  --safe-emerald: #10b981;
+  --safe-bg: rgba(16, 185, 129, 0.14);
+  --safe-border: rgba(16, 185, 129, 0.32);
+  --safe-glow: 0 0 24px rgba(16, 185, 129, 0.25);
+
+  --warning-amber: #f59e0b;
+  --warning-bg: rgba(245, 158, 11, 0.14);
+  --warning-border: rgba(245, 158, 11, 0.32);
+  --warning-glow: 0 0 24px rgba(245, 158, 11, 0.25);
+
+  --danger-crimson: #f43f5e;
+  --danger-bg: rgba(244, 63, 94, 0.16);
+  --danger-border: rgba(244, 63, 94, 0.4);
+  --danger-glow: 0 0 30px rgba(244, 63, 94, 0.35);
+
+  --offline-slate: #64748b;
+  --offline-bg: rgba(100, 116, 139, 0.14);
+  --offline-border: rgba(100, 116, 139, 0.28);
+
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-pill: 9999px;
+
+  --shadow-card: 0 12px 30px -8px rgba(0, 0, 0, 0.4), 0 4px 12px -2px rgba(0, 0, 0, 0.25);
+  --shadow-button: 0 8px 20px -4px rgba(249, 115, 22, 0.4);
+}
+
+/* Daylight / Clean Warm Studio Theme */
+[data-theme='light'] {
+  --bg-app: #f4f5f8;
+  --bg-surface: #ffffff;
+  --bg-surface-elevated: #f8fafc;
+  --bg-surface-hover: #f1f5f9;
+  --border-subtle: rgba(15, 23, 42, 0.08);
+  --border-strong: rgba(15, 23, 42, 0.14);
+  --border-glow: rgba(249, 115, 22, 0.3);
+
+  --text-main: #0f172a;
+  --text-muted: #64748b;
+  --text-subtle: #94a3b8;
+
+  --safe-bg: rgba(16, 185, 129, 0.12);
+  --warning-bg: rgba(245, 158, 11, 0.12);
+  --danger-bg: rgba(244, 63, 94, 0.12);
+  --offline-bg: rgba(100, 116, 139, 0.1);
+
+  --shadow-card: 0 10px 25px -5px rgba(15, 23, 42, 0.08), 0 2px 6px -1px rgba(15, 23, 42, 0.04);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  background-color: #080c14;
+  color: var(--text-main);
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  min-height: 100vh;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: 
+    radial-gradient(circle at 50% 0%, rgba(249, 115, 22, 0.08) 0%, transparent 60%),
+    radial-gradient(circle at 10% 80%, rgba(99, 102, 241, 0.06) 0%, transparent 50%);
+  background-attachment: fixed;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Outer Desktop Frame Container */
+.app-viewport-wrapper {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+
+@media (max-width: 600px) {
+  .app-viewport-wrapper {
+    padding: 0;
+  }
+}
+
+/* Realistic Mobile Device Frame */
+.device-shell {
+  width: 100%;
+  max-width: 420px;
+  height: 860px;
+  max-height: 94vh;
+  background-color: var(--bg-app);
+  border-radius: 46px;
+  box-shadow: 
+    0 0 0 10px #1e2535,
+    0 0 0 12px #2d3748,
+    0 25px 60px -12px rgba(0, 0, 0, 0.8);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+/* Responsive / Fluid View on Desktop Option */
+.device-shell.fluid-view {
+  max-width: 460px;
+  height: auto;
+  min-height: 100vh;
+  max-height: none;
+  border-radius: 0;
+  box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
+  border: none;
+}
+
+@media (max-width: 600px) {
+  .device-shell {
+    max-width: 100%;
+    height: 100dvh;
+    max-height: 100dvh;
+    border-radius: 0;
+    box-shadow: none;
+    border: none;
+  }
+}
+
+/* Mobile Status Bar (Realistic Clock, Dynamic Island, Battery) */
+.mobile-status-bar {
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--text-main);
+  z-index: 50;
+  user-select: none;
+}
+
+.dynamic-island {
+  width: 108px;
+  height: 26px;
+  background-color: #000000;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.dynamic-island:hover {
+  transform: scale(1.05);
+}
+
+/* Scrollable Screen Content Container */
+.screen-scroll-container {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 12px 18px 90px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  scroll-behavior: smooth;
+}
+
+.screen-scroll-container::-webkit-scrollbar {
+  width: 4px;
+}
+.screen-scroll-container::-webkit-scrollbar-thumb {
+  background: var(--border-subtle);
+  border-radius: 4px;
+}
+
+/* Tactile Card Component */
+.human-card {
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 18px;
+  box-shadow: var(--shadow-card);
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease, border-color 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.human-card.interactive:hover {
+  border-color: var(--border-strong);
+  transform: translateY(-2px);
+}
+
+.human-card.interactive:active {
+  transform: scale(0.98);
+}
+
+/* Human Tactile Buttons */
+.btn-primary {
+  background: var(--brand-gradient);
+  color: #ffffff;
+  border: none;
+  border-radius: var(--radius-pill);
+  padding: 12px 20px;
+  font-size: 0.92rem;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  box-shadow: var(--shadow-button);
+  transition: transform 0.15s ease, filter 0.15s ease;
+  text-decoration: none;
+}
+
+.btn-primary:active {
+  transform: scale(0.96);
+  filter: brightness(0.92);
+}
+
+.btn-secondary {
+  background: var(--bg-surface-elevated);
+  color: var(--text-main);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-pill);
+  padding: 10px 18px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.btn-secondary:hover {
+  background: var(--bg-surface-hover);
+  border-color: var(--border-strong);
+}
+
+.btn-secondary:active {
+  transform: scale(0.96);
+}
+
+/* Emergency Hotline Action Button */
+.btn-emergency {
+  background: linear-gradient(135deg, #f43f5e 0%, #e11d48 100%);
+  color: white;
+  border: none;
+  border-radius: var(--radius-pill);
+  padding: 12px 20px;
+  font-weight: 800;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  box-shadow: 0 8px 20px -4px rgba(244, 63, 94, 0.4);
+  transition: transform 0.15s ease;
+}
+
+.btn-emergency:active {
+  transform: scale(0.95);
+}
+
+/* Status Badges */
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  border-radius: var(--radius-pill);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.status-pill.safe {
+  background: var(--safe-bg);
+  color: var(--safe-emerald);
+  border: 1px solid var(--safe-border);
+}
+
+.status-pill.warning {
+  background: var(--warning-bg);
+  color: var(--warning-amber);
+  border: 1px solid var(--warning-border);
+  animation: pulse-glow 2s infinite ease-in-out;
+}
+
+.status-pill.critical {
+  background: var(--danger-bg);
+  color: var(--danger-crimson);
+  border: 1px solid var(--danger-border);
+  animation: pulse-urgent 1s infinite ease-in-out;
+}
+
+.status-pill.offline {
+  background: var(--offline-bg);
+  color: var(--offline-slate);
+  border: 1px solid var(--offline-border);
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.75; transform: scale(1.02); }
+}
+
+@keyframes pulse-urgent {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(1.04); }
+}
+
+/* Floating Bottom Navigation Bar */
+.bottom-nav-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 72px;
+  background: var(--bg-surface);
+  backdrop-filter: blur(20px);
+  border-top: 1px solid var(--border-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 0 8px 12px 8px;
+  z-index: 60;
+  box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.25);
+}
+
+.nav-tab-button {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  cursor: pointer;
+  padding: 6px 12px;
+  border-radius: 12px;
+  font-size: 0.68rem;
+  font-weight: 600;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+}
+
+.nav-tab-button.active {
+  color: var(--brand-primary);
+  transform: translateY(-2px);
+}
+
+.nav-tab-button.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0px;
+  width: 16px;
+  height: 3px;
+  background: var(--brand-primary);
+  border-radius: 3px;
+  box-shadow: 0 0 8px var(--brand-primary);
+}
+
+.nav-tab-button:active {
+  transform: scale(0.92);
+}
+
+/* Home Indicator Bar (iPhone gesture bar) */
+.home-indicator-bar {
+  position: absolute;
+  bottom: 4px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 130px;
+  height: 4px;
+  background-color: var(--text-subtle);
+  opacity: 0.4;
+  border-radius: 4px;
+  z-index: 70;
+  pointer-events: none;
+}
+
+/* Top App Header */
+.app-header {
+  padding: 10px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+/* Form Controls */
+.human-input {
+  width: 100%;
+  background: var(--bg-surface-elevated);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 14px 16px;
+  color: var(--text-main);
+  font-family: inherit;
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.human-input:focus {
+  border-color: var(--brand-primary);
+  box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.2);
+}
+
+/* Sonar radar pulse for BLE scanning */
+@keyframes radar-pulse {
+  0% { transform: scale(0.3); opacity: 0.9; }
+  100% { transform: scale(1.6); opacity: 0; }
+}
+
+.radar-circle {
+  animation: radar-pulse 2s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
+}

@@ -1,0 +1,12 @@
+{
+  "name": "gasguard-windows-desktop",
+  "version": "1.0.0",
+  "description": "GasGuard Smart IoT Gas Detector Desktop App for Windows",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "dependencies": {
+    "electron": "^30.0.0"
+  }
+}

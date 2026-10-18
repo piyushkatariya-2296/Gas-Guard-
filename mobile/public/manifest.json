@@ -1,0 +1,42 @@
+{
+  "short_name": "GasGuard",
+  "name": "GasGuard — Smart IoT Gas Leakage Detector",
+  "description": "Smart real-time LPG, butane, and propane gas safety monitor with Bluetooth & Wi-Fi cloud alerts",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#0d131f",
+  "theme_color": "#0d131f",
+  "categories": ["utilities", "lifestyle"],
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "type": "image/png",
+      "sizes": "192x192",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-512.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Check Safety",
+      "url": "/?tab=home",
+      "description": "View live atmospheric gas reading"
+    },
+    {
+      "name": "Live Waveform",
+      "url": "/?tab=live",
+      "description": "Inspect real-time MQ-6 sensor curve"
+    },
+    {
+      "name": "Emergency Alerts",
+      "url": "/?tab=alerts",
+      "description": "View emergency history and disconnections"
+    }
+  ]
+}

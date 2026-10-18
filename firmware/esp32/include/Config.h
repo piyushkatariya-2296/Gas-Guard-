@@ -1,0 +1,41 @@
+#ifndef GASGUARD_CONFIG_H
+#define GASGUARD_CONFIG_H
+
+#include <Arduino.h>
+
+// Device Identity
+#define DEVICE_ID "GG-000001"
+#define FIRMWARE_VERSION "1.0.0"
+#define HARDWARE_REVISION "ESP32-MQ6-v1"
+#define BLE_DEVICE_NAME "LPG SHIELD"
+
+// Pin Allocations
+#define MQ6_PIN 34           // Analog Input Pin for MQ-6 Gas Sensor
+#define BUZZER_PIN 25        // Digital Output Pin for Buzzer Alarm
+#define OLED_SDA 21          // I2C SDA
+#define OLED_SCL 22          // I2C SCL
+#define OLED_SCREEN_WIDTH 128
+#define OLED_SCREEN_HEIGHT 64
+#define OLED_RESET -1
+
+// Default Gas Thresholds (Raw ADC values out of 4095 for 12-bit ESP32 ADC)
+#define DEFAULT_WARNING_THRESHOLD 1000
+#define DEFAULT_CRITICAL_THRESHOLD 1500
+
+// BLE UUID Definitions (Preserved exact compatibility with prototype)
+#define SERVICE_UUID        "6E400001-B5A3-F393-E0A9-E50E24DCCA9E"
+#define GAS_VALUE_UUID      "6E400002-B5A3-F393-E0A9-E50E24DCCA9E"
+#define GAS_STATUS_UUID     "6E400003-B5A3-F393-E0A9-E50E24DCCA9E"
+#define BUZZER_UUID         "6E400004-B5A3-F393-E0A9-E50E24DCCA9E"
+#define THRESHOLD_UUID      "6E400005-B5A3-F393-E0A9-E50E24DCCA9E"
+#define WIFI_PROV_UUID      "6E400006-B5A3-F393-E0A9-E50E24DCCA9E"
+#define DEVICE_INFO_UUID    "6E400007-B5A3-F393-E0A9-E50E24DCCA9E"
+
+// Defaults & Reconnection
+#define DEFAULT_MQTT_BROKER "192.168.1.100"
+#define DEFAULT_MQTT_PORT 1883
+#define TELEMETRY_INTERVAL_MS 5000
+#define HEARTBEAT_INTERVAL_MS 30000
+#define BUFFER_MAX_SIZE 50
+
+#endif // GASGUARD_CONFIG_H
