@@ -53,6 +53,18 @@ jobs:
           cd mobile/android
           ./gradlew bundleRelease
 
+      - name: Generate .apkm and Universal APK via Bundletool
+        run: |
+          wget -q https://github.com/google/bundletool/releases/download/1.18.3/bundletool-all-1.18.3.jar -O bundletool.jar
+          mkdir -p mobile/android/app/build/outputs/apkm
+          # Generate split APKs bundle and create .apkm for APKMirror Installer
+          java -jar bundletool.jar build-apks --bundle=mobile/android/app/build/outputs/bundle/release/app-release.aab --output=mobile/android/app/build/outputs/apkm/gasguard.apks
+          cp mobile/android/app/build/outputs/apkm/gasguard.apks mobile/android/app/build/outputs/apkm/gasguard.apkm
+          # Generate standalone universal single-file APK
+          java -jar bundletool.jar build-apks --bundle=mobile/android/app/build/outputs/bundle/release/app-release.aab --output=universal.apks --mode=universal
+          unzip -q universal.apks -d universal_extracted
+          cp universal_extracted/universal.apk mobile/android/app/build/outputs/apk/release/gasguard-universal.apk
+
       - name: Upload Android APK
         uses: actions/upload-artifact@v4
         with:
@@ -64,6 +76,12 @@ jobs:
         with:
           name: gasguard-playstore-bundle-aab
           path: mobile/android/app/build/outputs/bundle/**/*.aab
+
+      - name: Upload APKM & APKS Bundle
+        uses: actions/upload-artifact@v4
+        with:
+          name: gasguard-android-apkm
+          path: mobile/android/app/build/outputs/apkm/*
 
   build-ios:
     name: Build iOS Native Archive
