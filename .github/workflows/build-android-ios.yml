@@ -95,3 +95,14 @@ jobs:
         run: |
           cd mobile/ios/App
           ls -la
+
+      - name: Package iOS Project Workspace
+        run: |
+          cd mobile/ios
+          tar -czf ../../gasguard-ios-project.tar.gz App
+
+      - name: Upload iOS Project Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: gasguard-ios-project
+          path: gasguard-ios-project.tar.gz
